@@ -17,11 +17,27 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
+    protected $primaryKey = 'id';
     protected $fillable = [
-        'name',
         'email',
         'password',
+        'role',
+        'RFID',
+        'status',
     ];
+
+    public function pelanggan(){
+        return $this->hasOne(pelanggan::class,'id_user');
+    }
+
+    public function admin(){
+        return $this->hasOne(admin::class,'id_user');
+    }
+
+    public function karyawan(){
+        return $this->hasOne(karyawan::class,'id_user');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
