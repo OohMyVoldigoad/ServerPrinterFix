@@ -4,6 +4,12 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\Admin;
+use App\Models\Karyawan;
+use App\Models\Pelanggan;
+use App\Models\FileInfo;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +18,40 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $Admin = User::create([
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('12345678'),
+            'role' => 'admin',
+            'RFID' => '08994805926',
+        ]);
+    
+        $Karyawan = User::create([
+            'email' => 'karyawan@gmail.com',
+            'password' => Hash::make('12345678'),
+            'role' => 'karyawan',
+            'RFID' => '08994805925',
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $Pelanggan = User::create([
+            'email' => 'pengguna1@gmail.com',
+            'password' => Hash::make('12345678'),
+            'role' => 'mahasiswa',
+            'RFID' => '08994805924',
+        ]);
+    
+        $profileAdmin = admin::create([
+            'id_user' => $Admin->id,
+            'nama' => 'admin',
+        ]);
+
+        $profileKaryawan = karyawan::create([
+            'id_user' => $Karyawan->id,
+            'nama' => 'karyawan',
+        ]);
+
+        $profilePelanggan = pelanggan::create([
+            'id_user' => $Pelanggan->id,
+            'nama' => 'pelanggan',
+        ]);
     }
 }

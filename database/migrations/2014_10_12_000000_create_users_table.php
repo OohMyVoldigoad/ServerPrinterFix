@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['mahasiswa', 'admin', 'karyawan'])->default('mahasiswa');
+            $table->enum('status', ['aktif','belum aktif'])->default('belum aktif');
+            $table->string('RFID');
             $table->rememberToken();
             $table->timestamps();
         });
